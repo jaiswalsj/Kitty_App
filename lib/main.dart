@@ -2,6 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:untitled1/UI/Phone_verification.dart';
+import 'package:untitled1/UI/my_kitty_page.dart';
+import 'package:untitled1/UI/notification_page.dart';
+import 'package:untitled1/UI/profile_page.dart';
+import 'package:untitled1/practice_page/validation_prac.dart';
 
 void main()
 {
@@ -28,7 +32,6 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Colors.purpleAccent.shade100,
       body: Stack(
         children: [
           Container(
@@ -40,15 +43,16 @@ class _SplashScreenState extends State<SplashScreen> {
               )
             ),
           ),Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset("assets/images/logo.png",height: 200,width: 200,)
-                ],
-              )
+              child: Image.asset("assets/images/logo.png",height: 200,width: 200,)
           ),
         ],
       )
     );
   }
 }
+
+
+// void main(){
+//   runApp(MaterialApp(home:MyKittyPage(),
+//   debugShowCheckedModeBanner: false,));
+// }
