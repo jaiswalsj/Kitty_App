@@ -83,10 +83,12 @@ class _HomePageState extends State<HomePage> {
                                     width: 20,
                                     height: 30,
                                     child: InkWell(
-                                      onTap: () {
 
+                                      onTap: () {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>DrawerBar()));
                                       },
                                       child: Container(
+
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
                                                 image: AssetImage(
@@ -417,4 +419,16 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  Widget DrawerBar(){
+    return Drawer(
+      child: ListView(
+
+        children: [
+
+          UserAccountsDrawerHeader(accountName: Text("sapan"), accountEmail: Text('sapanemail'),)
+        ],
+      ),
+    );
+}
 }
