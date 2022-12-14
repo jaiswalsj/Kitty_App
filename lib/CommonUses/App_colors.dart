@@ -3,6 +3,8 @@ import 'dart:ui';
 class App_colors{
 
 static const white = Color(0xFFFFFFFF);
+static const darkpink = Color(0xFFe73c65);
+static const lightpink = Color(0xFFdf4b90);
 static const background = Color(0xFFE5E5E5);
 static const icon_tint = Color(0xFF407BFF);
 static const big_text = Color(0xFF3C3C3C);
