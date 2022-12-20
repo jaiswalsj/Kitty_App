@@ -67,14 +67,12 @@ class PhoneVeri extends StatelessWidget with NumberInputValidation{
                                // color: Colors.red,
                                decoration: BoxDecoration(
                                  border: Border.all(color: App_colors.pink),
-                                 // color: Colors.green.shade100,
                                  borderRadius: BorderRadius.circular(10),
                                ),
 
                                child: Form(
                                  key: _numkey,
                                  child: Row(
-
                                    children: [
                                      Padding(
                                        padding: const EdgeInsets.only(left: 12.0),
@@ -93,8 +91,6 @@ class PhoneVeri extends StatelessWidget with NumberInputValidation{
                                          keyboardType: TextInputType.number,
 
                                          decoration: InputDecoration(
-
-
                                              hintText: ("9999999999"),
                                              border: InputBorder.none
                                          ),

@@ -22,78 +22,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         key: _key,
 
-        endDrawer: Container(
-          width: MediaQuery.of(context).size.width/1.5,
-
-          child: Drawer(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height/3,
-                   decoration: const BoxDecoration(
-                     gradient: LinearGradient(
-                       begin: Alignment.bottomRight,
-                       end: Alignment.topLeft,
-                       colors: [App_colors.lightpink,App_colors.darkpink]
-                     )
-                   ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(height: 40,),
-                        Center(child: CircleAvatar(backgroundImage: AssetImage(Images.demo_pic),radius: 35,)),
-                        const SizedBox(height: 10,),
-                        const Text("Full Name",style: TextStyle(color: App_colors.white,fontSize: 16),),
-                        const Align(
-                            alignment: Alignment.bottomLeft,
-                            child : Padding(
-                              padding: EdgeInsets.only(top: 40,left: 10),
-                              child: Text("Kitty Points : 30",style: TextStyle(color: App_colors.white,fontSize: 8),),
-                            ))
-                      ],
-                    ),
-                  ),
-
-               const Padding(
-                   padding: EdgeInsets.only(right: 25,top: 30),
-                   child: Text("Home",style: TextStyle(fontSize: 17),),
-                 ),
-
-                  const Padding(
-                    padding: EdgeInsets.only(right: 25,top: 30),
-                    child: Text("Shopping",style: TextStyle(fontSize: 17),),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(right: 25,top: 30),
-                    child: Text("Kitty Finance",style: TextStyle(fontSize: 17),),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(right: 25,top: 30),
-                    child: Text("Deals & Coupons",style: TextStyle(fontSize: 17),),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(right: 25,top: 30),
-                    child: Text("Kitty Games",style: TextStyle(fontSize: 17),),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(right: 25,top: 30),
-                    child: Text("Customer Support",style: TextStyle(fontSize: 17),),
-                  ),
-                  const SizedBox(height: 20,),
-                  Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Text("App Build: 0.1",style: TextStyle(fontSize: 10,color: App_colors.black.withOpacity(0.5)),),
-                      ))
-                ],
-              ),
-            ),
-          ),
-        ),
+        endDrawer:DrawerBar(),
         body: Container(
           child: Stack(
             children: [
@@ -128,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                                       height: 30,
                                       child: InkWell(
                                         onTap: () {
-                                          // Navigator.push(context, MaterialPageRoute(builder: (context)=>NotificationPage()));
+
                                         },
                                         child: Container(
                                           child: Stack(
@@ -500,13 +429,76 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget DrawerBar(){
-    return Drawer(
-      child: ListView(
+    return Container(
+      width: MediaQuery.of(context).size.width/1.5,
 
-        children: [
+      child: Drawer(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height/3,
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.bottomRight,
+                        end: Alignment.topLeft,
+                        colors: [App_colors.lightpink,App_colors.darkpink]
+                    )
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 40,),
+                    Center(child: CircleAvatar(backgroundImage: AssetImage(Images.demo_pic),radius: 35,)),
+                    const SizedBox(height: 10,),
+                    const Text("Full Name",style: TextStyle(color: App_colors.white,fontSize: 16),),
+                    const Align(
+                        alignment: Alignment.bottomLeft,
+                        child : Padding(
+                          padding: EdgeInsets.only(top: 40,left: 10),
+                          child: Text("Kitty Points : 30",style: TextStyle(color: App_colors.white,fontSize: 8),),
+                        ))
+                  ],
+                ),
+              ),
 
-          UserAccountsDrawerHeader(accountName: const Text("sapan"), accountEmail: const Text('sapanemail'),currentAccountPicture: CircleAvatar(backgroundImage: AssetImage(Images.demo_pic),radius: 30,),)
-        ],
+              const Padding(
+                padding: EdgeInsets.only(right: 25,top: 30),
+                child: Text("Home",style: TextStyle(fontSize: 17),),
+              ),
+
+              const Padding(
+                padding: EdgeInsets.only(right: 25,top: 30),
+                child: Text("Shopping",style: TextStyle(fontSize: 17),),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(right: 25,top: 30),
+                child: Text("Kitty Finance",style: TextStyle(fontSize: 17),),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(right: 25,top: 30),
+                child: Text("Deals & Coupons",style: TextStyle(fontSize: 17),),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(right: 25,top: 30),
+                child: Text("Kitty Games",style: TextStyle(fontSize: 17),),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(right: 25,top: 30),
+                child: Text("Customer Support",style: TextStyle(fontSize: 17),),
+              ),
+              const SizedBox(height: 20,),
+              Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text("App Build: 0.1",style: TextStyle(fontSize: 10,color: App_colors.black.withOpacity(0.5)),),
+                  ))
+            ],
+          ),
+        ),
       ),
     );
 }

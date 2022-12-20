@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:untitled1/CommonUses/App_colors.dart';
 import 'package:untitled1/CommonUses/images.dart';
 import 'package:untitled1/UI/myAccount_page.dart';
@@ -11,6 +14,18 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
+  File? _image;
+
+  void getImage({required ImageSource source})async{
+    final image = await ImagePicker().pickImage(source:source);
+    if(image?.path != null){
+      setState(() {
+        _image = File(image!.path);
+      });
+    }
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,36 +51,91 @@ class _ProfilePageState extends State<ProfilePage> {
                     SizedBox(
                       height: 45,
                     ),
-                    CircleAvatar(
-                      backgroundColor: App_colors.tint_grey,
-                      radius: 50,
-                      backgroundImage: NetworkImage(
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Mona_Lisa_%28copy%2C_Hermitage%29.jpg/224px-Mona_Lisa_%28copy%2C_Hermitage%29.jpg"),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            right: 10,
-                            top: 2,
-                            child: InkWell(
-                              onTap: () {},
-                              child: CircleAvatar(
-                                backgroundColor: Colors.grey,
-                                radius: 12,
-                                child: Stack(
+
+                    //this Inkwell is for setting the image
+                    InkWell(
+                      onTap: (){
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                              title: Text('Upload your profile photo'),
+                              content: Container(height: MediaQuery.of(context).size.height/6.5,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(
-                                      Icons.camera_alt,
-                                      color: App_colors.white,
-                                      size: 15,
-                                    )
+                                    ElevatedButton(onPressed: (){
+                                      getImage(source: ImageSource.gallery);
+                                      Navigator.pop(context);
+                                    }, child: Text("Set Image from Gallery"),style:  ButtonStyle(backgroundColor: MaterialStateProperty.all(App_colors.lightpink)),),
+                                    ElevatedButton(onPressed: (){
+                                      getImage(source: ImageSource.camera);
+                                      Navigator.pop(context);
+                                    }, child: Text("Take your photo"),style:  ButtonStyle(backgroundColor: MaterialStateProperty.all(App_colors.lightpink)),),
                                   ],
                                 ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                              )
+                          ),
+                        );
+                      },
+                       child:  _image != null?
+                       CircleAvatar(backgroundImage: FileImage(_image!),radius: 50,
+                         child: Stack(
+                           children: [
+                             Positioned(
+                               right: 10,
+                               top: 2,
+                               child: InkWell(
+                                 onTap: () {},
+                                 child: CircleAvatar(
+                                   backgroundColor: Colors.grey,
+                                   radius: 12,
+                                   child: Stack(
+                                     children: [
+                                       Icon(
+                                         Icons.camera_alt,
+                                         color: App_colors.white,
+                                         size: 15,
+                                       )
+                                     ],
+                                   ),
+                                 ),
+                               ),
+                             )
+                           ],
+                         ),
+                       ):
+                       CircleAvatar(
+                         backgroundColor: App_colors.tint_grey,
+                         radius: 50,
+                         backgroundImage: NetworkImage(
+                             "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Mona_Lisa_%28copy%2C_Hermitage%29.jpg/224px-Mona_Lisa_%28copy%2C_Hermitage%29.jpg"),
+                         child: Stack(
+                           children: [
+                             Positioned(
+                               right: 10,
+                               top: 2,
+                               child: InkWell(
+                                 onTap: () {},
+                                 child: CircleAvatar(
+                                   backgroundColor: Colors.grey,
+                                   radius: 12,
+                                   child: Stack(
+                                     children: [
+                                       Icon(
+                                         Icons.camera_alt,
+                                         color: App_colors.white,
+                                         size: 15,
+                                       )
+                                     ],
+                                   ),
+                                 ),
+                               ),
+                             )
+                           ],
+                         ),
+                       ),
                     ),
+
                     SizedBox(
                       height: 30,
                     ),

@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  file_picker: ^5.0.1
   flutter:
     sdk: flutter
 
@@ -37,6 +38,8 @@ dependencies:
   pinput: ^2.2.16
   auto_size_text: ^3.0.0
   intl: ^0.17.0
+  image_picker: ^0.8.6
+
 
 dev_dependencies:
   flutter_test:

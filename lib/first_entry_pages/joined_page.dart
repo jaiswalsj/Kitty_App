@@ -1,9 +1,10 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:untitled1/CommonUses/App_colors.dart';
 import 'package:untitled1/CommonUses/images.dart';
 import 'package:untitled1/UI/Dashboard.dart';
-import 'package:untitled1/UI/home_page.dart';
 
 class JoinPage extends StatefulWidget {
   const JoinPage({Key? key}) : super(key: key);
@@ -13,6 +14,19 @@ class JoinPage extends StatefulWidget {
 }
 
 class _JoinPageState extends State<JoinPage> {
+
+  File? _image;
+
+  void getImage({required ImageSource source})async{
+    final image = await ImagePicker().pickImage(source:source);
+    if(image?.path != null){
+      setState(() {
+        _image = File(image!.path);
+      });
+    }
+
+  }
+
   final dob = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -65,8 +79,34 @@ class _JoinPageState extends State<JoinPage> {
                                 SizedBox(height: 28,),
                                 Text("Upload Profile Photo",style: TextStyle(fontSize: 16,color: App_colors.pink),),
                                 InkWell(
-                                    onTap: (){},
-                                    child: CircleAvatar(backgroundImage: AssetImage(Images.demo_img),radius: 40)
+                                    onTap: (){
+                                      showDialog<String>(
+                                        context: context,
+                                        builder: (BuildContext context) => AlertDialog(
+                                          title: Text('Upload your profile photo'),
+                                          content: Container(height: MediaQuery.of(context).size.height/6.5,
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                ElevatedButton(onPressed: (){
+                                                  getImage(source: ImageSource.gallery);
+                                                  Navigator.pop(context);
+                                                }, child: Text("Set Image from Gallery"),style:  ButtonStyle(backgroundColor: MaterialStateProperty.all(App_colors.lightpink)),),
+                                                ElevatedButton(onPressed: (){
+                                                  getImage(source: ImageSource.camera);
+                                                  Navigator.pop(context);
+                                                }, child: Text("Take your photo"),style:  ButtonStyle(backgroundColor: MaterialStateProperty.all(App_colors.lightpink)),),
+                                              ],
+                                            ),
+                                          )
+                                        ),
+                                      );
+                                    },
+                                    child:  _image != null?
+                                        CircleAvatar(radius: 40,
+                                        backgroundImage:FileImage(_image!),
+                                        )
+                                        :CircleAvatar(backgroundImage: AssetImage(Images.demo_img),radius: 40,)
                                 ),
                                 SizedBox(height: 20,),
                                 Text("Enter your DOB",style: TextStyle(color: App_colors.pink,fontSize: 16),),
@@ -113,10 +153,12 @@ class _JoinPageState extends State<JoinPage> {
       } else {
         print("Date is not selected");
       }
-    }                     ),
+    }
+    ),
                                 ),
                                 SizedBox(height: 20,),
-                                RaisedButton(onPressed: (){
+                                RaisedButton(onPressed: (){dob.text.isEmpty?
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Enter your Birth Data  "))):
                                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainPage()));
                                 },child: Text("Let's Get Started",style: TextStyle(color: App_colors.white),),color: App_colors.pink,),
 

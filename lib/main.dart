@@ -5,6 +5,7 @@ import 'package:untitled1/UI/Phone_verification.dart';
 import 'package:untitled1/UI/my_kitty_page.dart';
 import 'package:untitled1/UI/notification_page.dart';
 import 'package:untitled1/UI/profile_page.dart';
+import 'package:untitled1/first_entry_pages/joined_page.dart';
 import 'package:untitled1/practice_page/validation_prac.dart';
 
 void main()
@@ -53,6 +54,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 // void main(){
-//   runApp(MaterialApp(home:MyKittyPage(),
+//   runApp(MaterialApp(home:JoinPage(),
 //   debugShowCheckedModeBanner: false,));
 // }
